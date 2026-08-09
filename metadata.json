@@ -1,0 +1,159 @@
+{
+  "name": "Q12 Hopf-Skyrme Finalish Dataset",
+  "description": "Finalish Q=12 Hopf-Skyrme numerical candidate from the Quantum Tide research prototype. The dataset is intended as a permanent public archive of the final low-energy field configuration, a reference Hessian/Lanczos diagnostic, and the metadata required to interpret the result honestly and reproducibly.",
+  "status": "Q=12 finalish experiment concluded at the high-value stopping point: final relaxation reached E<2335 with Q_fft approximately -11.07; the reference Hessian line scan at the preceding finalish field had maximum scanned objective decrease below 0.02 in absolute value.",
+  "author": "Chao Wang",
+  "date": "2026-07-30",
+  "dataset_license": "CC BY 4.0",
+  "source_code_license": "MIT",
+  "source_code": {
+    "repository": "https://github.com/jy02538662/wangchao-quantum-tide",
+    "intended_repository_name": "quantum-tide-hopfion-cpu",
+    "note": "The source-code URL points to the Quantum Tide Hopfion prototype. This DOI (10.5281/zenodo.21760493) covers the v1.6.6 code release alongside the preprint PDF on the same Zenodo record chain (v7).",
+    "code_zenodo_doi": "10.5281/zenodo.21760493",
+    "code_release_tag": "v1.6.6",
+    "preprint_zenodo_record": "https://zenodo.org/records/21760493"
+  },
+  "project_context": {
+    "program": "Quantum Tide Theory numerical prototype",
+    "numerical_model": "Faddeev-Skyrme / Hopf-Skyrme type 3D unit-vector field",
+    "purpose": "To test whether high-HopF-charge linked field configurations can be relaxed into robust low-energy valleys while maintaining an approximately conserved Hopf charge.",
+    "interpretation_boundary": "This dataset is computational evidence for a Q12 Hopf-Skyrme finalish candidate. It is not a proof of a rigorously Hessian-positive local minimizer, quantum computation, quantum gravity, dark matter, dark energy, or a completed physical theory."
+  },
+  "grid": {
+    "n": 96,
+    "length": 12.0,
+    "spacing_h": 0.25263157894736843,
+    "boundary_or_box_note": "Uniform cubic grid with physical box length L=12."
+  },
+  "model_parameters": {
+    "p": 3,
+    "q": 4,
+    "nominal_charge": 12,
+    "scale": 6.0,
+    "energy_coefficients": {
+      "a": 1.0,
+      "b": 1.0
+    }
+  },
+  "relaxation_backend": {
+    "script": "src/hopf_skyrme_torch.py",
+    "backend": "torch",
+    "device": "cuda",
+    "dtype": "torch.float32"
+  },
+  "final_field": {
+    "role": "lowest-energy final short-confirmed Q12 field",
+    "recommended_archive_file": "Q12_finalish_E2332p888_Qm11p070850_nfield_q1_torch.npy",
+    "original_output_path": "outputs/Q12_final_confirm_qpen8000_target11075_relax10000_lr3e7/nfield_q1_torch.npy",
+    "final_summary_original_path": "outputs/Q12_final_confirm_qpen8000_target11075_relax10000_lr3e7/summary.json",
+    "history_original_path": "outputs/Q12_final_confirm_qpen8000_target11075_relax10000_lr3e7/history.json",
+    "init_field_original_path": "outputs/Q12_longhold4_qpen8000_target11075_relax50000_lr5e7/nfield_q1_torch.npy",
+    "relaxation_command": "python hopf_skyrme_torch.py --n 96 --length 12 --p 3 --q 4 --scale 6.0 --init outputs/Q12_longhold4_qpen8000_target11075_relax50000_lr5e7/nfield_q1_torch.npy --steps 10000 --q-penalty 8000 --q-target -11.075 --q-guard 10.0 --lr 0.0000003 --grad-clip 0.01 --print-every 1000 --hopf-every 1000 --out outputs/Q12_final_confirm_qpen8000_target11075_relax10000_lr3e7",
+    "steps_requested": 10000,
+    "steps_completed": 10000,
+    "learning_rate": 3e-7,
+    "grad_clip": 0.01,
+    "q_penalty": 8000.0,
+    "q_target": -11.075,
+    "q_guard": 10.0,
+    "stopped_by_q_guard": false,
+    "final_E_total": 2332.88818359375,
+    "final_E2": 1999.344970703125,
+    "final_E4": 333.5431213378906,
+    "final_Q_fft": -11.070849621164095,
+    "final_core_volume": 5676.486328125,
+    "elapsed_sec": 113.73182559013367,
+    "max_deviation": 2.0,
+    "note": "This is the lowest-energy field in the final archived chain. A separate final Hessian diagnostic was not rerun after this last short confirmation descent; the reference Hessian below corresponds to the immediately preceding finalish field at E approximately 2334.45."
+  },
+  "reference_hessian_field": {
+    "role": "preceding finalish field with explicit Hessian/Lanczos diagnostic",
+    "recommended_archive_file": "Q12_hessian_reference_field_E2334p452_Qm11p070837_nfield_q1_torch.npy",
+    "original_output_path": "outputs/Q12_longhold4_qpen8000_target11075_relax50000_lr5e7/nfield_q1_torch.npy",
+    "E_total": 2334.45166015625,
+    "E2": 2000.9063720703125,
+    "E4": 333.5453796386719,
+    "Q_fft": -11.07083674413748,
+    "core_volume": 5680.43701171875,
+    "note": "This field is slightly higher in energy than the final short-confirmed field, but it is the field for which the final Hessian/Lanczos diagnostic was recorded."
+  },
+  "reference_hessian": {
+    "script": "src/hopf_hessian_torch.py",
+    "recommended_archive_eigenvalue_file": "Q12_hessian_E2334p452_Qm11p070837_ritz_eigenvalues.npy",
+    "original_output_directory": "outputs/hessian_Q12_finalish_qpen8000_target110708_iters40_seed1234",
+    "hessian_command": "python hopf_hessian_torch.py --field outputs/Q12_longhold4_qpen8000_target11075_relax50000_lr5e7/nfield_q1_torch.npy --length 12 --iters 40 --seed 1234 --device cuda --hvp-mode constrained --q-penalty 8000 --q-target -11.0708 --scan-modes 8 --save-modes 8 --out outputs/hessian_Q12_finalish_qpen8000_target110708_iters40_seed1234",
+    "device": "cuda",
+    "dtype": "torch.float32",
+    "lanczos_iterations": 40,
+    "seed": 1234,
+    "hvp_mode": "constrained",
+    "q_penalty": 8000.0,
+    "q_target": -11.0708,
+    "associated_energy": 2334.45166015625,
+    "associated_Q_fft": -11.070837,
+    "num_negative_ritz_values_among_reported_lowest_modes": 8,
+    "lowest_ritz_eigenvalues_first_20": [
+      -15.507952805,
+      -14.759228821,
+      -13.224696201,
+      -11.898408012,
+      -9.900020331,
+      -7.800458615,
+      -4.96650507,
+      -1.291404914,
+      1.441021802,
+      4.140113621,
+      7.217690485,
+      10.574397625,
+      14.141442429,
+      17.639446892,
+      21.374599247,
+      25.269408612,
+      29.219084869,
+      33.128113076,
+      37.282859137,
+      41.456614714
+    ],
+    "line_scan_eps_values": [-0.05, -0.02, -0.01, 0.0, 0.01, 0.02, 0.05],
+    "max_abs_negative_dObj_in_scanned_modes": 0.017764223786,
+    "strongest_scanned_descent": {
+      "mode": 2,
+      "eps": -0.05,
+      "dObj": -0.017764223786,
+      "dE": -0.019775390625,
+      "Q_fft_after_perturbation": -11.070297,
+      "dQ": 0.0005398
+    },
+    "mode8_summary": {
+      "eigenvalue": -1.2914049143,
+      "strongest_negative_dObj": -0.0033203165399,
+      "strongest_negative_eps": -0.05,
+      "note": "Mode 8 was the shallowest negative Ritz mode among the eight negative values, not the strongest descent direction. Its line-scan objective decrease was much smaller than the leading modes."
+    },
+    "interpretation": "The reference Hessian still has residual negative Ritz values. The line-scan objective decreases are small at the chosen eps values, with the strongest scanned decrease below 0.02. This supports a practical finalish stopping point but not a strict Hessian-positive stability claim."
+  },
+  "recommended_zenodo_files_minimal": [
+    "Q12_finalish_E2332p888_Qm11p070850_nfield_q1_torch.npy",
+    "metadata.json",
+    "Q12_hessian_E2334p452_Qm11p070837_ritz_eigenvalues.npy"
+  ],
+  "recommended_zenodo_files_extended": [
+    "Q12_finalish_E2332p888_Qm11p070850_nfield_q1_torch.npy",
+    "Q12_finalish_summary.json",
+    "Q12_finalish_history.json",
+    "Q12_hessian_reference_field_E2334p452_Qm11p070837_nfield_q1_torch.npy",
+    "Q12_hessian_E2334p452_Qm11p070837_ritz_eigenvalues.npy",
+    "Q12_hessian_summary.json",
+    "metadata.json"
+  ],
+  "why_outputs_are_not_in_git": "The outputs directory contains generated binary arrays and potentially large numerical artifacts. GitHub repositories are best used for source code, documentation, and small examples. Large .npy/.npz/Hessian output files should be archived in Zenodo, GitHub Releases, OSF, or another data repository to keep the Git history small and reproducible.",
+  "citation_note": "If uploaded to Zenodo, cite the generated DOI for the dataset and cite the GitHub repository for the source code. The final field and reference Hessian are related but not identical states: the final field has lower energy, while the reference Hessian was computed on the immediately preceding finalish field.",
+  "limitations": [
+    "The final low-energy field was obtained in float32 at N=96 and L=12; higher precision or higher resolution may shift numerical values.",
+    "The Hopf charge estimator Q_fft is approximate and resolution-dependent; Q_fft approximately -11.07 is interpreted as the Q=12 sector within this workflow.",
+    "The final reference Hessian still contains eight negative Ritz values among the reported lowest modes.",
+    "The final short-confirmed lowest-energy field was not followed by a separate new Hessian calculation; the reference Hessian corresponds to the preceding field.",
+    "The dataset does not establish quantum gravity, dark matter, dark energy, or quantum-computing functionality."
+  ]
+}

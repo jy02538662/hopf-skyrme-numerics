@@ -1,0 +1,8 @@
+# Force LF line endings on shell scripts regardless of host OS.
+# Without this, PowerShell-created files come out CRLF and bash refuses
+# to parse them ("$'\r': command not found", "syntax error near `fi'").
+
+*.sh text eol=lf
+*.bash text eol=lf
+*.py text eol=lf
+*.md text eol=lf

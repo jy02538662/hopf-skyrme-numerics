@@ -1,0 +1,13 @@
+numpy>=1.24,<2
+# Optional autograd backend:
+# torch
+# GPU machine only: install the CuPy build matching CUDA, e.g.
+# cupy-cuda12x>=13
+
+# Hopf fiber / preimage linking / BP2.5 Poisson helpers
+scikit-image>=0.19
+scipy>=1.10
+# Optional: soft-monopole far-field plot (scripts/gravity_crosschecks)
+# matplotlib>=3.7
+# pyvista for .vtk export (installs its own VTK dependency)
+# pip install pyvista
